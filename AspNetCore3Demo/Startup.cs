@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Prometheus;
 
 namespace AspNetCore3Demo
 {
@@ -25,6 +26,8 @@ namespace AspNetCore3Demo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
+
             services.AddControllers();
         }
 
@@ -39,6 +42,7 @@ namespace AspNetCore3Demo
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseMetricServer();
 
             app.UseAuthorization();
 
